@@ -1,3 +1,5 @@
 package com.jadenwjh.restdemo.model
 
-data class Node(val name: String, val url: String)
+import java.io.Serializable
+
+data class Node(val name: String = "", val url: String = ""): Serializable

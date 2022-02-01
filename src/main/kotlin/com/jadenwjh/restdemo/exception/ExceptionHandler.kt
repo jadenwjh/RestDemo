@@ -1,6 +1,7 @@
 package com.jadenwjh.restdemo.exception
 
 import com.jadenwjh.restdemo.exception.message.ElementNotFoundException
+import com.jadenwjh.restdemo.exception.message.InvalidPostException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
@@ -21,6 +22,10 @@ class ExceptionHandler: ResponseEntityExceptionHandler() {
     @ExceptionHandler(ElementNotFoundException::class)
     fun handleElementNotFoundException(exception: Exception, webRequest: WebRequest): ResponseEntity<Any> =
         getResponseEntity(exception, webRequest, HttpStatus.NOT_FOUND)
+
+    @ExceptionHandler(InvalidPostException::class)
+    fun handleInvalidPostException(exception: Exception, webRequest: WebRequest): ResponseEntity<Any> =
+        getResponseEntity(exception, webRequest, HttpStatus.BAD_REQUEST)
 
     private fun getResponseEntity(exception: Exception, webRequest: WebRequest, status: HttpStatus) =
         ResponseEntity<Any>(
