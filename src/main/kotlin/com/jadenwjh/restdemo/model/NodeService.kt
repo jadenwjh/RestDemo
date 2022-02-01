@@ -20,9 +20,11 @@ class NodeService {
     fun getAll(): List<Node> = nodes
 
     fun getByName(matchingName: String): Node? = nodes.stream()
-        .filter { node -> node.name == matchingName }
+        .filter {node -> node.name == matchingName}
         .findFirst()
         .orElse(null)
 
-    fun saveNode(node: Node) = nodes.add(node)
+    fun save(node: Node) = nodes.add(node)
+
+    fun deleteByName(matchingName: String): Boolean = nodes.removeIf {node -> node.name == matchingName}
 }
