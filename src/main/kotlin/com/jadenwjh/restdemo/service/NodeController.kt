@@ -25,12 +25,18 @@ class NodeController {
     @PostMapping("/nodes")
     fun saveNode(@RequestBody node: Node): ResponseEntity<Any> {
         if (node.name.isBlank()) throw InvalidPostException("Name cannot be null or blank")
-        service.saveNode(node)
+        service.save(node)
         return ResponseEntity.created(
             ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{name}")
                 .buildAndExpand(node.name)
                 .toUri())
             .build()
+    }
+
+    @DeleteMapping("/nodes/delete/{name}")
+    fun deleteNode(@PathVariable name: String) {
+        val deleted = service.deleteByName(name)
+        if (!deleted) throw ElementNotFoundException("Node with name $name not found")
     }
 }
