@@ -18,4 +18,9 @@ class NodeService {
     }
 
     fun getAll(): List<Node> = nodes
+
+    fun getByName(matchingName: String): Node? = nodes.stream()
+        .filter { node -> node.name == matchingName }
+        .findFirst()
+        .orElse(null)
 }
