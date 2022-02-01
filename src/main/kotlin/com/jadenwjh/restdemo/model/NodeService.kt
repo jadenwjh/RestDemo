@@ -23,4 +23,6 @@ class NodeService {
         .filter { node -> node.name == matchingName }
         .findFirst()
         .orElse(null)
+
+    fun saveNode(node: Node) = nodes.add(node)
 }
